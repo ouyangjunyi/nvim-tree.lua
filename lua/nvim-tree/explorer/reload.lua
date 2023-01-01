@@ -86,7 +86,7 @@ function M.reload(node, git_status, unloaded_bufnr)
       end
 
       if not nodes_by_path[abs] then
-        if t == "directory" and vim.loop.fs_access(abs, "R") then
+        if t == "directory" and vim.loop.fs_access(abs, "RX") then
           local folder = builders.folder(node, abs, name)
           nodes_by_path[abs] = folder
           table.insert(node.nodes, folder)

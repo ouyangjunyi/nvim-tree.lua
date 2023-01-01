@@ -30,7 +30,7 @@ local function populate_children(handle, cwd, node, git_status)
     t = get_type_from(t, abs)
     if not filters.should_filter(abs, filter_status) and not nodes_by_path[abs] then
       local child = nil
-      if t == "directory" and vim.loop.fs_access(abs, "R") then
+      if t == "directory" and vim.loop.fs_access(abs, "RX") then
         child = builders.folder(node, abs, name)
       elseif t == "file" then
         child = builders.file(node, abs, name)
