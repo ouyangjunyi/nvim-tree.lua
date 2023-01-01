@@ -159,4 +159,29 @@ function M.purge_watchers()
   end
 end
 
+-- TODO hide this behind windows FF
+function M.event_capable(path)
+  local fs_event, name, rc, _
+
+  fs_event, _, name = vim.loop.new_fs_event()
+  if not fs_event then
+    log.line("watcher", "event_capable not new the fs_event watcher for path %s : %s", path, name)
+    return false
+  end
+
+  rc, _, name = fs_event:start(path, FS_EVENT_FLAGS, function() end)
+  if rc ~= 0 then
+    log.line("watcher", "event_capable could not start the fs_event watcher for path %s : %s", path, name)
+    return false
+  end
+
+  rc, _, name = fs_event:stop()
+  if rc ~= 0 then
+    log.line("watcher", "event_capable could not stop the fs_event watcher for path %s : %s", path, name)
+    return false
+  end
+
+  return true
+end
+
 return M
