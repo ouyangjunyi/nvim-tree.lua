@@ -7,11 +7,6 @@ function M.folder(parent, absolute_path, name)
   local handle = utils.fs_scandir_profiled(absolute_path)
   local has_children = handle and utils.fs_scandir_next_profiled(handle, absolute_path) ~= nil
 
-  -- powershell presents directories that are not always readable
-  if utils.is_windows and not vim.loop.fs_access(absolute_path, "X") then
-    return
-  end
-
   local node = {
     type = "directory",
     absolute_path = absolute_path,

@@ -127,7 +127,4 @@ Api.marks.navigate.next = require("nvim-tree.marks.navigation").next
 Api.marks.navigate.prev = require("nvim-tree.marks.navigation").prev
 Api.marks.navigate.select = require("nvim-tree.marks.navigation").select
 
--- Api.config.current = nil
--- Api.config.default = nil
-
 return Api
