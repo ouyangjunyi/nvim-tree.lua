@@ -65,6 +65,9 @@ function Event:start()
 
   rc, _, name = self._fs_event:start(self._path, FS_EVENT_FLAGS, event_cb)
   if rc ~= 0 then
+    if name == "ENOSPC" then
+      return false
+    end
     notify.warn(string.format("Could not start the fs_event watcher for path %s : %s", self._path, name))
     return false
   end
